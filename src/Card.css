@@ -1,12 +1,3 @@
-.card {
-  border: 1px solid black;
-  width: 140px;
-  height: 125px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .card-grid {
   border: 1px solid blue;
   display: flex;
@@ -16,6 +7,15 @@
   gap: 10px;
   justify-content: center;
   padding: 10px 0;
+}
+
+.card {
+  border: 1px solid black;
+  width: 140px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .card > button {

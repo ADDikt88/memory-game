@@ -6,8 +6,8 @@ import "./Card.css";
 import CardGrid from "./Card.jsx";
 //import { ChampionContext } from "./RiotChamps.jsx";
 
-const size = 9;
-function MemoryApp({ selectedChampions, version, onReselect }) {
+//const size = 9;
+function MemoryApp({ selectedChampions, version, onReselect, size }) {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
@@ -53,12 +53,14 @@ function MemoryApp({ selectedChampions, version, onReselect }) {
       setCardClicked(-2);
       setCardClickedList([]);
       onReselect();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (score == size - 1) {
       setScore(size);
       setBestScore(size);
       setCardClicked(-3);
       setCardClickedList([]);
       onReselect();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       score == size ? setScore(1) : setScore((score) => score + 1);
       newCardClickedList.push(selectedChampions[index]);
@@ -71,7 +73,7 @@ function MemoryApp({ selectedChampions, version, onReselect }) {
   return (
     <>
       <h1>{"Snowy's Memory Game"}</h1>
-      <div className="card">
+      <div className="score-table">
         <p>Score: {score}</p>
         <p>Best Score: {score > bestScore ? setBestScore(score) : bestScore}</p>
       </div>
@@ -80,16 +82,16 @@ function MemoryApp({ selectedChampions, version, onReselect }) {
           "Get points by clicking on an image but don't click on any more than once!"
         }
       </p>
+      <p className="game-over-display">
+        {cardClicked > -99 &&
+          (cardClicked == -2
+            ? "Game Over. You've already clicked that champion. Play again!"
+            : "You Win! You have a great memory! Play again!")}
+      </p>
       <CardGrid
         cardList={selectedChampions}
         handleCardClick={handleCardClick}
       />
-      <p>
-        {cardClicked > -99 &&
-          (cardClicked == -2
-            ? "Game Over. You've already clicked that number. Play again!"
-            : "You Win! You have a great memory! Play again!")}
-      </p>
     </>
   );
 }

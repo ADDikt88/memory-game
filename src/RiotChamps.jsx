@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 
 import MemoryApp from "./MemoryApp";
 
-const size = 9;
-
 export function ChampionProvider() {
   const [champions, setChampions] = useState([]);
   const [version, setVersion] = useState("");
   const [selectedChampions, setSelectedChampions] = useState([]);
+  const [size, setSize] = useState(9);
 
   useEffect(() => {
     // Step 1: Get the current version of Data Dragon
@@ -57,6 +56,7 @@ export function ChampionProvider() {
         selectedChampions={selectedChampions}
         version={version}
         onReselect={() => selectRandomChampions(champions)}
+        size={size}
       />
     </div>
   );
