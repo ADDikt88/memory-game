@@ -1,8 +1,9 @@
-# React + Vite
+# League of Legends Memory Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live link: https://lol-memory-game.pages.dev/
+This is a memory game that tracks how well the user can correctly select 9 randomly generated
+League of Legends champions without choosing a previously selected champion.
 
-Currently, two official plugins are available:
+The user can keep track of their high score in between attempts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Tech stack: React + Vite
