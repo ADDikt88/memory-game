@@ -6,15 +6,14 @@ import "./Card.css";
 import CardGrid from "./Card.jsx";
 //import { ChampionContext } from "./RiotChamps.jsx";
 
-const size = 10;
-
-function MemoryApp({ champions, version }) {
+const size = 9;
+function MemoryApp({ selectedChampions, version, onReselect }) {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
   const [cardClicked, setCardClicked] = useState(-99);
   const [cardClickedList, setCardClickedList] = useState([]);
-  const [cardList, setCardList] = useState(initializeChampList(size));
+  //const [cardList, setCardList] = useState(selectedChampions);
 
   function initializeCardList(size) {
     const cardList = [];
@@ -28,19 +27,6 @@ function MemoryApp({ champions, version }) {
     return shuffle(cardList);
   }
 
-  function initializeChampList(size) {
-    const champList = shuffle(champions).slice(0, size);
-    const champImgList = [];
-    champList.forEach((champion) => {
-      const imgChamp = {
-        src: `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.id}.png`,
-        label: champion.name,
-      };
-      champImgList.push(imgChamp);
-    });
-    return shuffle(champImgList);
-  }
-
   function checkCardList(cardClicked, cardClickedList) {
     for (let j = 0; j < cardClickedList.length; j++) {
       if (cardClickedList[j].label == cardClicked.label) {
@@ -51,33 +37,35 @@ function MemoryApp({ champions, version }) {
   }
 
   function handleCardClick(index) {
-    console.log("You clicked: " + cardList[index].label);
+    console.log("You clicked: " + selectedChampions[index].label);
 
-    //Store the previously clicked card
-    setCardClicked(cardList[index].label);
+    // //Store the previously clicked card
+    // setCardClicked(selectedChampions[index].label);
+    // console.log(cardClicked);
 
     //Store the previously clicked card in a new list
     const newCardClickedList = cardClickedList;
 
     //Check if the card had been previously clicked
-    if (checkCardList(cardList[index], newCardClickedList)) {
+    if (checkCardList(selectedChampions[index], newCardClickedList)) {
       //trigger end
       setScore(0);
       setCardClicked(-2);
       setCardClickedList([]);
-      //initializeChampList(size);
-    } else if (score == 9) {
-      setScore(10);
-      setBestScore(10);
+      onReselect();
+    } else if (score == size - 1) {
+      setScore(size);
+      setBestScore(size);
       setCardClicked(-3);
       setCardClickedList([]);
-      //initializeChampList(size);
+      onReselect();
     } else {
-      score == 10 ? setScore(1) : setScore((score) => score + 1);
-      newCardClickedList.push(cardList[index]);
+      score == size ? setScore(1) : setScore((score) => score + 1);
+      newCardClickedList.push(selectedChampions[index]);
       setCardClickedList(newCardClickedList);
+      setCardClicked(-99);
     }
-    setCardList(shuffle(cardList));
+    //setCardList(shuffle(selectedChampions));
   }
 
   return (
@@ -92,12 +80,13 @@ function MemoryApp({ champions, version }) {
           "Get points by clicking on an image but don't click on any more than once!"
         }
       </p>
-      <CardGrid cardList={cardList} handleCardClick={handleCardClick} />
+      <CardGrid
+        cardList={selectedChampions}
+        handleCardClick={handleCardClick}
+      />
       <p>
         {cardClicked > -99 &&
-          (cardClicked > -1
-            ? "You previously clicked: " + cardClicked
-            : cardClicked == -2
+          (cardClicked == -2
             ? "Game Over. You've already clicked that number. Play again!"
             : "You Win! You have a great memory! Play again!")}
       </p>

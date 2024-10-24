@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 
 function CardGrid({ cardList, handleCardClick }) {
   console.log(cardList);
+
+  let shuffledCardList = shuffle(cardList);
   return (
     <>
       <div className="card-grid">
-        {cardList.map((card, index) => (
+        {shuffledCardList.map((card, index) => (
           <Card
             src={card.src}
             label={card.label}
@@ -35,6 +37,15 @@ function Card({ src, label, handleCardClick, index }) {
       </div>
     </>
   );
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
 }
 
 export default CardGrid;
