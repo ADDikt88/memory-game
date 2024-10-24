@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 function CardGrid({ cardList, handleCardClick }) {
-  console.log(cardList);
+  //console.log(cardList);
 
   let shuffledCardList = shuffle(cardList);
   return (

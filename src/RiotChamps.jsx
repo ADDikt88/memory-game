@@ -46,7 +46,7 @@ export function ChampionProvider() {
       };
       champImgList.push(imgChamp);
     });
-    console.log(champImgList);
+    //console.log(champImgList);
     setSelectedChampions(champImgList); // Update the state with the selected champions
   };
 

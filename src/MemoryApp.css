@@ -1,7 +1,8 @@
 #root {
   max-width: 1280px;
+  min-width: 340px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1rem;
   text-align: center;
 }
 
@@ -16,6 +17,18 @@
   text-align: center;
   min-height: 3rem;
   font-weight: bold;
+  margin-bottom: 0;
+}
+
+.title {
+  margin: 1rem;
+  padding: 0 5px;
+  max-width: 70%;
+}
+
+.score-table {
+  display: flex;
+  gap: 25px;
 }
 
 .logo {
@@ -52,4 +65,28 @@
 
 .rules {
   color: #888;
+}
+
+@media screen and (max-width: 720px) {
+  .title {
+    font-size: 2rem;
+  }
+  .rules,
+  .game-over-display {
+    padding: 0 10px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .title {
+    font-size: 1.7rem;
+    margin-top: 10px;
+  }
+  #root {
+    padding: 10px 0px;
+  }
+  .rules,
+  .game-over-display {
+    margin: 5px 10px;
+  }
 }

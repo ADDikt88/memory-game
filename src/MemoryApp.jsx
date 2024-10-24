@@ -37,7 +37,7 @@ function MemoryApp({ selectedChampions, version, onReselect, size }) {
   }
 
   function handleCardClick(index) {
-    console.log("You clicked: " + selectedChampions[index].label);
+    //console.log("You clicked: " + selectedChampions[index].label);
 
     // //Store the previously clicked card
     // setCardClicked(selectedChampions[index].label);
@@ -72,7 +72,7 @@ function MemoryApp({ selectedChampions, version, onReselect, size }) {
 
   return (
     <>
-      <h1>{"Snowy's Memory Game"}</h1>
+      <h1 className="title">{"League of Legends Memory Game"}</h1>
       <div className="score-table">
         <p>Score: {score}</p>
         <p>Best Score: {score > bestScore ? setBestScore(score) : bestScore}</p>
@@ -92,6 +92,12 @@ function MemoryApp({ selectedChampions, version, onReselect, size }) {
         cardList={selectedChampions}
         handleCardClick={handleCardClick}
       />
+      <p className="author">
+        {"made by: "}
+        <a href="https://github.com/ADDikt88/" target="_blank">
+          github/ADDikt88
+        </a>
+      </p>
     </>
   );
 }
