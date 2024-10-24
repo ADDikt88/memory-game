@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 function CardGrid({ cardList, handleCardClick }) {
+  console.log(cardList);
   return (
     <>
       <div className="card-grid">
@@ -22,13 +23,13 @@ function Card({ src, label, handleCardClick, index }) {
   return (
     <>
       <div className="card">
-        {/* <img src={src} alt={label} /> */}
         <button
-          className="edit-exp"
+          className="champ-button"
           onClick={() => {
             handleCardClick(index);
           }}
         >
+          <img src={src} alt={label} width={100} />
           <span>{label}</span>
         </button>
       </div>

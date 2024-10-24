@@ -4,16 +4,17 @@ import { useState, useEffect } from "react";
 import "./MemoryApp.css";
 import "./Card.css";
 import CardGrid from "./Card.jsx";
+//import { ChampionContext } from "./RiotChamps.jsx";
 
 const size = 10;
 
-function MemoryApp() {
+function MemoryApp({ champions, version }) {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
   const [cardClicked, setCardClicked] = useState(-99);
   const [cardClickedList, setCardClickedList] = useState([]);
-  const [cardList, setCardList] = useState(initializeCardList(size));
+  const [cardList, setCardList] = useState(initializeChampList(size));
 
   function initializeCardList(size) {
     const cardList = [];
@@ -25,6 +26,19 @@ function MemoryApp() {
       cardList.push(card);
     }
     return shuffle(cardList);
+  }
+
+  function initializeChampList(size) {
+    const champList = shuffle(champions).slice(0, size);
+    const champImgList = [];
+    champList.forEach((champion) => {
+      const imgChamp = {
+        src: `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.id}.png`,
+        label: champion.name,
+      };
+      champImgList.push(imgChamp);
+    });
+    return shuffle(champImgList);
   }
 
   function checkCardList(cardClicked, cardClickedList) {
@@ -51,11 +65,13 @@ function MemoryApp() {
       setScore(0);
       setCardClicked(-2);
       setCardClickedList([]);
+      //initializeChampList(size);
     } else if (score == 9) {
       setScore(10);
       setBestScore(10);
       setCardClicked(-3);
       setCardClickedList([]);
+      //initializeChampList(size);
     } else {
       score == 10 ? setScore(1) : setScore((score) => score + 1);
       newCardClickedList.push(cardList[index]);
